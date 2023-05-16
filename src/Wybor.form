@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Wybor">
-  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="11" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
@@ -8,44 +8,93 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="9b293" class="javax.swing.JButton" binding="owcaButton" default-binding="true">
+      <component id="6ee9d" class="javax.swing.JButton" binding="BARSZCZSOSNOWSKIEGOButton" default-binding="true">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Owca"/>
+          <text value="BARSZCZ SOSNOWSKIEGO"/>
         </properties>
       </component>
-      <component id="d05ef" class="javax.swing.JButton" binding="button2" default-binding="true">
+      <component id="bc641" class="javax.swing.JButton" binding="GUARANAButton" default-binding="true">
         <constraints>
-          <grid row="0" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="GUARANA"/>
         </properties>
       </component>
-      <component id="65bac" class="javax.swing.JButton" binding="button3" default-binding="true">
+      <component id="dad2b" class="javax.swing.JButton" binding="WILCZAJAGODAButton" default-binding="true">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="WILCZA JAGODA"/>
+        </properties>
+      </component>
+      <component id="cdc56" class="javax.swing.JButton" binding="MLECZButton" default-binding="true">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="MLECZ"/>
+        </properties>
+      </component>
+      <component id="5832a" class="javax.swing.JButton" binding="TRAWAButton" default-binding="true">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="TRAWA"/>
+        </properties>
+      </component>
+      <component id="d80d8" class="javax.swing.JButton" binding="ANTYLOPAButton" default-binding="true">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="ANTYLOPA"/>
+        </properties>
+      </component>
+      <component id="fae0f" class="javax.swing.JButton" binding="ZOLWButton">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="ŻÓŁW"/>
+        </properties>
+      </component>
+      <component id="3d4cb" class="javax.swing.JButton" binding="LISButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="LIS"/>
+        </properties>
+      </component>
+      <component id="d977" class="javax.swing.JButton" binding="WILKButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="WILK"/>
+        </properties>
+      </component>
+      <component id="b1025" class="javax.swing.JButton" binding="OWCAButton" default-binding="true">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="OWCA"/>
         </properties>
       </component>
-      <component id="39d95" class="javax.swing.JButton" binding="button4" default-binding="true">
+      <component id="7fac3" class="javax.swing.JLabel">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
-        </properties>
-      </component>
-      <component id="730ef" class="javax.swing.JButton" binding="button5" default-binding="true">
-        <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Button"/>
+          <font size="18"/>
+          <text value="Wybierz organizm, który chcesz stworzyć"/>
         </properties>
       </component>
     </children>

@@ -40,11 +40,12 @@ public void NowaTura() {
 
     String text = WypiszPowiadomienia();
     powiadomienia.setText(text);
+    MainForm.frame.requestFocusInWindow();
     }
 
     public String WypiszPowiadomienia() {
         List<String> powiadomienia = swiat.getPowiadomienia();
-        String text = "";
+        String text = "<html>";
         if (powiadomienia.size() < 6) {
             for (int i = 0; i < powiadomienia.size(); i++) {
                 text += powiadomienia.get(i) + " <br>";
@@ -61,16 +62,23 @@ public void NowaTura() {
         swiat.zapisz();
     }
 
-    public void Superumiejetnosc(){
-        Wybor w = new Wybor(swiat);
-        w.setSize(400, 400);
-        PopupFactory pf = PopupFactory.getSharedInstance();
-        Point l = SUPERUMIEJETNOSCButton.getLocationOnScreen();
-        Popup popup = pf.getPopup(MainForm.frame, w, l.x, l.y);
-        popup.show();
+//    public  void PokazDialogWyboruOrganizmu() {
+//        JDialog dialog = new JDialog();
+//
+//        Wybor w = new Wybor(dialog, swiat);
+//
+//        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//        dialog.setModal(true); // to block input to other windows
+//        dialog.getContentPane().add(w.mainPanel);
+//        dialog.pack();
+//        dialog.setLocationRelativeTo(null); // center on screen
+//        dialog.setVisible(true);
+//    }
 
+    public void Superumiejetnosc() {
+        //PokazDialogWyboruOrganizmu();
 
-       // Czlowiek.umiejetnosc();
+        //Czlowiek.Umiejetnosc();
     }
 
 }

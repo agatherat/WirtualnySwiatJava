@@ -1,12 +1,37 @@
 import java.util.Scanner;
-public class Czlowiek extends Zwierze {
-    public static final int KEY_UP = 72;
-    public static final int KEY_DOWN = 80;
-    public static final int KEY_LEFT = 75;
-    public static final int KEY_RIGHT = 77;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+public class Czlowiek extends Zwierze  {
     private int odlicznanieDoUmiejetnosci = 0;
     private int stanPoczatkowy;
     private boolean czyUmiejetnoscAktywna = false;
+    private Ruch ruch = Ruch.NONE;
+//    private boolean Up=false;
+//
+//    private boolean Down= false;
+//    private boolean Right= false;
+//    private boolean Left= false;
+
+//    @Override
+//    public void keyPressed(KeyEvent e) {
+//        if (e.getKeyCode() == KeyEvent.VK_UP) {
+//            // Handle up arrow key pressed
+//            Up=true;
+//            System.out.println("Up arrow key pressed");
+//        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+//            Down=true;
+//            // Handle down arrow key pressed
+//            System.out.println("Down arrow key pressed");
+//        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+//            Left=true;
+//            // Handle left arrow key pressed
+//            System.out.println("Left arrow key pressed");
+//        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+//            Right=true;
+//            // Handle right arrow key pressed
+//            System.out.println("Right arrow key pressed");
+//        }
+//    }
 
     public Czlowiek(int pozX, int pozY, Swiat swiat, int wiek, boolean zyje) {
         super(5, 4, pozX, pozY, swiat, 'C', wiek, zyje);
@@ -21,12 +46,27 @@ public class Czlowiek extends Zwierze {
         this.stanPoczatkowy = stanPoczatkowy;
         this.czyUmiejetnoscAktywna = czyUmiejetnoscAktywna;
     }
-
-//    @Override
-//    public void akcja() {
-//        System.out.println("Wykonaj swoj ruch!");
-//        Scanner scanner = new Scanner(System.in);
-//        char c = scanner.next().charAt(0);
+public void setRuch(Ruch x){
+        this.ruch=x;
+}
+    @Override
+    public void akcja() {
+        if(ruch==Ruch.UP&&swiat.czyPoleJestCzesiaMapy(pozX, pozY - 1)){
+            swiat.przesun(pozX, pozY, pozX, pozY - 1);
+            ruch=Ruch.NONE;
+        }
+        else if(ruch==Ruch.DOWN&&swiat.czyPoleJestCzesiaMapy(pozX, pozY + 1)){
+            swiat.przesun(pozX, pozY, pozX, pozY + 1);
+            ruch=Ruch.NONE;
+        }
+        else if(ruch==Ruch.LEFT&&swiat.czyPoleJestCzesiaMapy(pozX - 1, pozY)){
+            swiat.przesun(pozX, pozY, pozX - 1, pozY);
+            ruch=Ruch.NONE;
+        }
+        else if(ruch==Ruch.RIGHT&&swiat.czyPoleJestCzesiaMapy(pozX + 1, pozY)){
+            swiat.przesun(pozX, pozY, pozX + 1, pozY);
+            ruch=Ruch.NONE;
+        };
 //        switch (c) {
 //            case KEY_UP:
 //                if (swiat.czyPoleJestCzesiaMapy(pozX, pozY - 1)) {
@@ -51,41 +91,40 @@ public class Czlowiek extends Zwierze {
 //            default:
 //                break;
 //        }
-//
-//        Umiejetnosc();
-//
-//    }
-//
-//    public void Umiejetnosc() {
-//        if (!czyUmiejetnoscAktywna && odlicznanieDoUmiejetnosci < 5) {
-//            odlicznanieDoUmiejetnosci++;
-//            stanPoczatkowy = sila;
-//        }
-//
-//        magicznyEliksir();
-//    }
-//    public void magicznyEliksir() {
-//            if (odlicznanieDoUmiejetnosci == 5) {
-//                swiat.dodajPowiadomienie("Superumiejetnosc aktywowana! ");
-//                czyUmiejetnoscAktywna = true;
-//                sila = 11;
-//            } else if (czyUmiejetnoscAktywna == false) {
-//                swiat.dodajPowiadomienie("Superumiejetnosc nie jest gotowa! ");
-//            } else if (czyUmiejetnoscAktywna) {
-//                swiat.dodajPowiadomienie("Do konca super umiejetnosci pozostalo: " + odlicznanieDoUmiejetnosci + ".");
-//            }
-//
-//        if (czyUmiejetnoscAktywna == true) {
-//            if (stanPoczatkowy <= 10) {
-//                sila--;
-//                odlicznanieDoUmiejetnosci--;
-//                if (sila == stanPoczatkowy) {
-//                    czyUmiejetnoscAktywna = false;
-//                    odlicznanieDoUmiejetnosci = 0;
-//                }
-//            }
-//         }
-// }
+       // Umiejetnosc();
+
+    }
+
+    public void Umiejetnosc() {
+        if (!czyUmiejetnoscAktywna && odlicznanieDoUmiejetnosci < 5) {
+            odlicznanieDoUmiejetnosci++;
+            stanPoczatkowy = sila;
+        }
+
+        magicznyEliksir();
+    }
+    public void magicznyEliksir() {
+            if (odlicznanieDoUmiejetnosci == 5) {
+                swiat.dodajPowiadomienie("Superumiejetnosc aktywowana! ");
+                czyUmiejetnoscAktywna = true;
+                sila = 11;
+            } else if (czyUmiejetnoscAktywna == false) {
+                swiat.dodajPowiadomienie("Superumiejetnosc nie jest gotowa! ");
+            } else if (czyUmiejetnoscAktywna) {
+                swiat.dodajPowiadomienie("Do konca super umiejetnosci pozostalo: " + odlicznanieDoUmiejetnosci + ".");
+            }
+
+        if (czyUmiejetnoscAktywna == true) {
+            if (stanPoczatkowy <= 10) {
+                sila--;
+                odlicznanieDoUmiejetnosci--;
+                if (sila == stanPoczatkowy) {
+                    czyUmiejetnoscAktywna = false;
+                    odlicznanieDoUmiejetnosci = 0;
+                }
+            }
+         }
+ }
 
 
     @Override

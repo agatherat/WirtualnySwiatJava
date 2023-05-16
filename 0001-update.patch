@@ -1,0 +1,266 @@
+From 9a2d82622ff9fb293e0bd31dd889e06ffb628f32 Mon Sep 17 00:00:00 2001
+From: tojatos <tojatos@gmail.com>
+Date: Mon, 15 May 2023 21:13:12 +0200
+Subject: [PATCH] update
+
+---
+ src/ArrowKeyListener.java |  6 ------
+ src/Gra.java              | 23 +++++++++++++++--------
+ src/MainForm.java         |  4 +++-
+ src/Mapa.java             | 33 ++++++++++++---------------------
+ src/Swiat.java            |  1 +
+ src/Wybor.form            | 20 ++++++++++++++------
+ src/Wybor.java            | 16 +++++++++++++---
+ 7 files changed, 58 insertions(+), 45 deletions(-)
+
+diff --git a/src/ArrowKeyListener.java b/src/ArrowKeyListener.java
+index 150aa17..646eb34 100644
+--- a/src/ArrowKeyListener.java
++++ b/src/ArrowKeyListener.java
+@@ -4,12 +4,6 @@ import java.awt.event.KeyListener;
+ import javax.swing.JFrame;
+ 
+ public class ArrowKeyListener implements KeyListener {
+-    private JFrame frame;
+-
+-    public ArrowKeyListener(JFrame frame) {
+-        this.frame = frame;
+-    }
+-
+     @Override
+     public void keyPressed(KeyEvent e) {
+         if (e.getKeyCode() == KeyEvent.VK_UP) {
+diff --git a/src/Gra.java b/src/Gra.java
+index 23b6e93..355ea54 100644
+--- a/src/Gra.java
++++ b/src/Gra.java
+@@ -44,7 +44,7 @@ public void NowaTura() {
+ 
+     public String WypiszPowiadomienia() {
+         List<String> powiadomienia = swiat.getPowiadomienia();
+-        String text = "";
++        String text = "<html>";
+         if (powiadomienia.size() < 6) {
+             for (int i = 0; i < powiadomienia.size(); i++) {
+                 text += powiadomienia.get(i) + " <br>";
+@@ -61,14 +61,21 @@ public void NowaTura() {
+         swiat.zapisz();
+     }
+ 
+-    public void Superumiejetnosc(){
+-        Wybor w = new Wybor(swiat);
+-        w.setSize(400, 400);
+-        PopupFactory pf = PopupFactory.getSharedInstance();
+-        Point l = SUPERUMIEJETNOSCButton.getLocationOnScreen();
+-        Popup popup = pf.getPopup(MainForm.frame, w, l.x, l.y);
+-        popup.show();
++    public void PokazDialogWyboruOrganizmu() {
++        JDialog dialog = new JDialog();
+ 
++        Wybor w = new Wybor(dialog, swiat);
++
++        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
++        dialog.setModal(true); // to block input to other windows
++        dialog.getContentPane().add(w.mainPanel);
++        dialog.pack();
++        dialog.setLocationRelativeTo(null); // center on screen
++        dialog.setVisible(true);
++    }
++
++    public void Superumiejetnosc() {
++        PokazDialogWyboruOrganizmu();
+ 
+        // Czlowiek.umiejetnosc();
+     }
+diff --git a/src/MainForm.java b/src/MainForm.java
+index ce8dc05..b8271de 100644
+--- a/src/MainForm.java
++++ b/src/MainForm.java
+@@ -48,7 +48,9 @@ public class MainForm {
+         frame.setContentPane(new MainForm().panel1);
+         frame.pack();
+         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+-        frame.addKeyListener(new ArrowKeyListener(frame));
++        frame.addKeyListener(new ArrowKeyListener());
++        frame.setFocusable(true);
++        frame.requestFocusInWindow();
+         frame.setVisible(true);
+ 
+     }
+diff --git a/src/Mapa.java b/src/Mapa.java
+index 42a6f95..6aaec2a 100644
+--- a/src/Mapa.java
++++ b/src/Mapa.java
+@@ -3,6 +3,8 @@ import java.awt.*;
+ import java.awt.Dimension;
+ import java.awt.event.KeyEvent;
+ import java.awt.event.KeyListener;
++import java.awt.event.MouseAdapter;
++import java.awt.event.MouseEvent;
+ import javax.swing.JPanel;
+ public class Mapa extends JPanel {
+     private Swiat swiat;
+@@ -14,6 +16,16 @@ public class Mapa extends JPanel {
+         this.swiat = swiat;
+         this.setPreferredSize(new Dimension(swiat.getM().x * TILE_SIZE, swiat.getM().y * TILE_SIZE));
+         //this.setBackground(Color.WHITE);
++        addMouseListener(new MouseAdapter() {
++            @Override
++            public void mouseClicked(MouseEvent e) {
++                super.mouseClicked(e);
++                int col = e.getX() / TILE_SIZE;
++                int row = e.getY() / TILE_SIZE;
++
++                System.out.println(new Point(col, row));
++            }
++        });
+     }
+ 
+     @Override
+@@ -77,25 +89,4 @@ public class Mapa extends JPanel {
+             }
+         }
+     }
+-
+-    @Override
+-    protected void processMouseEvent(java.awt.event.MouseEvent e) {
+-        super.processMouseEvent(e);
+-
+-        System.out.println("processing");
+-        // If the user clicked inside the panel
+-        if (e.getID() == java.awt.event.MouseEvent.MOUSE_CLICKED) {
+-            int col = e.getX() / TILE_SIZE;
+-            int row = e.getY() / TILE_SIZE;
+-
+-            System.out.println(new Point(col, row));
+-            // If the user clicked on a valid tile, select it
+-            if (col >= 0 && col < swiat.getM().y && row >= 0 && row < swiat.getM().x) {
+-                System.out.println(new Point(col, row));
+-//                selectedTile = ;
+-//                repaint();
+-            }
+-        }
+-    }
+-
+ }
+\ No newline at end of file
+diff --git a/src/Swiat.java b/src/Swiat.java
+index c4236e6..ae11ca5 100644
+--- a/src/Swiat.java
++++ b/src/Swiat.java
+@@ -126,6 +126,7 @@ public class Swiat {
+ 
+     public String pobierzPowiadomienia() {
+         StringBuilder builder = new StringBuilder();
++        builder.append("<html>");
+         if (powiadomienia.size() < 6) {
+             for (int i = 0; i < powiadomienia.size(); i++) {
+                 builder.append(powiadomienia.get(i)).append("<br>");
+diff --git a/src/Wybor.form b/src/Wybor.form
+index f04a5fe..0162df9 100644
+--- a/src/Wybor.form
++++ b/src/Wybor.form
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Wybor">
+-  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
++  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+     <margin top="0" left="0" bottom="0" right="0"/>
+     <constraints>
+       <xy x="20" y="20" width="500" height="400"/>
+@@ -10,7 +10,7 @@
+     <children>
+       <component id="9b293" class="javax.swing.JButton" binding="owcaButton" default-binding="true">
+         <constraints>
+-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
++          <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+         </constraints>
+         <properties>
+           <text value="Owca"/>
+@@ -18,7 +18,7 @@
+       </component>
+       <component id="d05ef" class="javax.swing.JButton" binding="button2" default-binding="true">
+         <constraints>
+-          <grid row="0" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
++          <grid row="0" column="2" row-span="3" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+         </constraints>
+         <properties>
+           <text value="Button"/>
+@@ -26,7 +26,7 @@
+       </component>
+       <component id="65bac" class="javax.swing.JButton" binding="button3" default-binding="true">
+         <constraints>
+-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
++          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+         </constraints>
+         <properties>
+           <text value="Button"/>
+@@ -34,7 +34,7 @@
+       </component>
+       <component id="39d95" class="javax.swing.JButton" binding="button4" default-binding="true">
+         <constraints>
+-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
++          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+         </constraints>
+         <properties>
+           <text value="Button"/>
+@@ -42,12 +42,20 @@
+       </component>
+       <component id="730ef" class="javax.swing.JButton" binding="button5" default-binding="true">
+         <constraints>
+-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
++          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+         </constraints>
+         <properties>
+           <text value="Button"/>
+         </properties>
+       </component>
++      <component id="e9378" class="javax.swing.JLabel">
++        <constraints>
++          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
++        </constraints>
++        <properties>
++          <text value="Label"/>
++        </properties>
++      </component>
+     </children>
+   </grid>
+ </form>
+diff --git a/src/Wybor.java b/src/Wybor.java
+index d5e706a..8d01f7d 100644
+--- a/src/Wybor.java
++++ b/src/Wybor.java
+@@ -1,17 +1,27 @@
+ import javax.swing.*;
++import java.awt.*;
+ 
+ public class Wybor extends JPanel {
+-    private Swiat swiat;
+     private JButton owcaButton;
+     private JButton button2;
+     private JButton button3;
+     private JButton button4;
+     private JButton button5;
++    public JPanel mainPanel;
++
++
++    private Swiat swiat;
++    private JDialog parentDialog;
+ 
+-    public Wybor(Swiat swiat) {
++    public Wybor(JDialog parentDialog, Swiat swiat) {
+         this.swiat = swiat;
++        this.parentDialog = parentDialog;
++        setPreferredSize(new Dimension(400, 400));
+         //owcaButton.addActionListener(a -> swiat.dodajOrganizm(new Owca()));
+ 
+-        owcaButton.addActionListener(a -> System.out.println("owca"));
++        owcaButton.addActionListener(a -> {
++            System.out.println("owca");
++            parentDialog.dispose();
++        });
+     }
+ }
+-- 
+2.34.1.windows.1
+

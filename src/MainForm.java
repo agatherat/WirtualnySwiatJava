@@ -36,11 +36,13 @@ public class MainForm {
 //        frame.addKeyListener(gra);
 //        gra.panel2.setFocusable(true);
         frame.pack();
+        //MainForm.frame.requestFocusInWindow();
     }
 
     private MainForm() {
         nowySwiatButton.addActionListener(a -> stworzNowySwiat());
         wczytajSwiatButton.addActionListener(a-> wczytajNowySwiat());
+
     }
     public static void main(String[] args) {
         frame = new JFrame("Agnieszka Kulesz 193461");
@@ -48,8 +50,11 @@ public class MainForm {
         frame.setContentPane(new MainForm().panel1);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.addKeyListener(new ArrowKeyListener(frame));
+        frame.addKeyListener(new ArrowKeyListener());
+        frame.setFocusable(true);
+        frame.requestFocusInWindow();
         frame.setVisible(true);
+
 
     }
 }

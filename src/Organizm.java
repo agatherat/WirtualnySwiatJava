@@ -23,7 +23,7 @@ public abstract class Organizm {
     public abstract void akcja();
     public abstract void kolizja(Organizm a);
     public abstract void rysowanie();
-    public abstract Organizm kopiuj();
+    public  abstract Organizm kopiuj();
 //    public abstract boolean czyOdbilAtak(Organizm agresor);
 //    public abstract boolean czyUciekl(Organizm agresor);
 //    public abstract boolean czyOtrul(Organizm a);

@@ -126,6 +126,7 @@ public class Swiat {
 
     public String pobierzPowiadomienia() {
         StringBuilder builder = new StringBuilder();
+        builder.append("<html>");
         if (powiadomienia.size() < 6) {
             for (int i = 0; i < powiadomienia.size(); i++) {
                 builder.append(powiadomienia.get(i)).append("<br>");
@@ -144,16 +145,26 @@ public class Swiat {
         //}
         //return null;
     }
+    public Organizm getORganizmPoSymbolu(char symbol) {
+        for (Organizm organizm : organizmy) {
+            if (organizm.getSymbol() == symbol) {
+                return organizm;
+            }
+        }
+        return null;
+    }
     public void wykonajTure() {
         uporzadkuj();
-        this.powiadomienia.add("TURA "+tura);
+
         powiadomienia.clear();
+        powiadomienia.add("TURA "+tura);
         List<Organizm> tmp = new ArrayList<>(organizmy);
         for (Organizm organizm : tmp) {
-            if (organizm != null && organizm.getZyje()) {
+            if (organizm != null && organizm.getZyje()&&organizm.wiek>=0) {
                 organizm.akcja();
-                organizm.setWiek(organizm.getWiek() + 1);
+
             }
+            organizm.setWiek(organizm.getWiek() + 1);
         }
 
         setTura(getTura() + 1);
