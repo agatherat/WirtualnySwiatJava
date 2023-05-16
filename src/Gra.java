@@ -61,7 +61,9 @@ public void NowaTura() {
 
     public void Superumiejetnosc() {
         Czlowiek czlowiek=swiat.getCzlowiek();
-        czlowiek.Umiejetnosc();
+        czlowiek.magicznyEliksir();
+        String text = WypiszPowiadomienia();
+        powiadomienia.setText(text);
     }
 
 }

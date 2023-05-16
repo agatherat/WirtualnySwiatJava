@@ -41,17 +41,15 @@ public void setRuch(Ruch x){
             swiat.przesun(pozX, pozY, pozX + 1, pozY);
             ruch=Ruch.NONE;
         };
-    }
 
-    public void Umiejetnosc() {
-        System.out.println("HEJ");
         if (!czyUmiejetnoscAktywna && odlicznanieDoUmiejetnosci < 5) {
             odlicznanieDoUmiejetnosci++;
             stanPoczatkowy = sila;
         }
-
-        magicznyEliksir();
     }
+
+
+
     public void magicznyEliksir() {
             if (odlicznanieDoUmiejetnosci == 5) {
                 System.out.println("aktywowana");
