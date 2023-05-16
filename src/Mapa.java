@@ -9,16 +9,12 @@ import javax.swing.JPanel;
 public class Mapa extends JPanel {
     private Swiat swiat;
     private JPanel map;
-    public int column;
-    public static int row;
     private Integer TILE_SIZE = 30;
 
     public Mapa(Swiat swiat) {
         this.swiat = swiat;
-
-
         this.setPreferredSize(new Dimension(swiat.getM().x * TILE_SIZE, swiat.getM().y * TILE_SIZE));
-        //this.setBackground(Color.WHITE);
+
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -35,7 +31,6 @@ public class Mapa extends JPanel {
     }
     public  void PokazDialogWyboruOrganizmu(int x, int y) {
         JDialog dialog = new JDialog();
-
         Wybor w = new Wybor(dialog, swiat, x, y);
 
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -55,47 +50,49 @@ public class Mapa extends JPanel {
             for (int j = 0; j < swiat.getM().y; j++) {
                 if (swiat.getOrganizm(i,j) != null) {
                     if (swiat.getOrganizm(i,j) instanceof Owca) {
-                        g.setColor(Color.PINK);
+                        Color customColor = new Color(237, 164, 185);
+                        g.setColor(customColor);
                     }
                     if (swiat.getOrganizm(i,j) instanceof Wilk) {
                         Color customColor = new Color(157, 149, 158);
                         g.setColor(customColor);
                     }
                     if (swiat.getOrganizm(i,j) instanceof Lis) {
-                        Color customColor = new Color(237, 147, 12);
+                        Color customColor = new Color(235, 166, 106);
                         g.setColor(customColor);
                     }
                     if (swiat.getOrganizm(i,j) instanceof Antylopa) {
-                        Color customColor = new Color(207, 159, 97);
+                        Color customColor = new Color(99, 81, 66);
                         g.setColor(customColor);
                     }
                     if (swiat.getOrganizm(i,j) instanceof Zolw) {
-                        Color customColor = new Color(41, 84, 34);
+                        Color customColor = new Color(90, 115, 94);
                         g.setColor(customColor);
                     }
                     if (swiat.getOrganizm(i,j) instanceof Trawa) {
-                        Color customColor = new Color(41, 235, 9);
+                        Color customColor = new Color(84, 153, 95);
                         g.setColor(customColor);
                     }
                     if (swiat.getOrganizm(i,j) instanceof Mlecz) {
-                        Color customColor = new Color(235, 209, 9);
+                        Color customColor = new Color(237, 231, 140);
                         g.setColor(customColor);
                     }
                     if (swiat.getOrganizm(i,j) instanceof Guarana) {
-                        Color customColor = new Color(204, 69, 85);
+                        Color customColor = new Color(219, 88, 143);
                         g.setColor(customColor);
                     }
                     if (swiat.getOrganizm(i,j) instanceof BarszczSosnowskiego) {
-                        Color customColor = new Color(31, 24, 17);
+                        Color customColor = new Color(43, 29, 33);
                         g.setColor(customColor);
                     }
                     if (swiat.getOrganizm(i,j) instanceof WilczeJagody) {
-                        Color customColor = new Color(128, 34, 168);
+                        Color customColor = new Color(175, 119, 201);
                         g.setColor(customColor);
                     }
 
                     if (swiat.getOrganizm(i,j) instanceof Czlowiek) {
-                        g.setColor(Color.RED);
+                        Color customColor = new Color(219, 22, 79);
+                        g.setColor(customColor);
                     }
 
                 } else {
@@ -104,8 +101,6 @@ public class Mapa extends JPanel {
                 g.fillRect(i * width, j * height, width, height);
                 g.setColor(Color.WHITE);
                 Font font = new Font(g.getFont().getFontName(), Font.BOLD, 14);
-                // 14 to rozmiar czcionki, możesz dostosować go do swoich potrzeb
-                // Ustawianie pogrubionej czcionki
                 g.setFont(font);
 
                 Organizm o= swiat.getOrganizm(i,j);

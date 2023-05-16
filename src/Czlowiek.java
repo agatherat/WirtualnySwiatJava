@@ -6,32 +6,6 @@ public class Czlowiek extends Zwierze  {
     private int stanPoczatkowy;
     private boolean czyUmiejetnoscAktywna = false;
     private Ruch ruch = Ruch.NONE;
-//    private boolean Up=false;
-//
-//    private boolean Down= false;
-//    private boolean Right= false;
-//    private boolean Left= false;
-
-//    @Override
-//    public void keyPressed(KeyEvent e) {
-//        if (e.getKeyCode() == KeyEvent.VK_UP) {
-//            // Handle up arrow key pressed
-//            Up=true;
-//            System.out.println("Up arrow key pressed");
-//        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-//            Down=true;
-//            // Handle down arrow key pressed
-//            System.out.println("Down arrow key pressed");
-//        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-//            Left=true;
-//            // Handle left arrow key pressed
-//            System.out.println("Left arrow key pressed");
-//        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-//            Right=true;
-//            // Handle right arrow key pressed
-//            System.out.println("Right arrow key pressed");
-//        }
-//    }
 
     public Czlowiek(int pozX, int pozY, Swiat swiat, int wiek, boolean zyje) {
         super(5, 4, pozX, pozY, swiat, 'C', wiek, zyje);
@@ -67,35 +41,10 @@ public void setRuch(Ruch x){
             swiat.przesun(pozX, pozY, pozX + 1, pozY);
             ruch=Ruch.NONE;
         };
-//        switch (c) {
-//            case KEY_UP:
-//                if (swiat.czyPoleJestCzesiaMapy(pozX, pozY - 1)) {
-//                    swiat.przesun(pozX, pozY, pozX, pozY - 1);
-//                }
-//                break;
-//            case KEY_DOWN:
-//                if (swiat.czyPoleJestCzesiaMapy(pozX, pozY + 1)) {
-//                    swiat.przesun(pozX, pozY, pozX, pozY + 1);
-//                }
-//                break;
-//            case KEY_LEFT:
-//                if (swiat.czyPoleJestCzesiaMapy(pozX - 1, pozY)) {
-//                    swiat.przesun(pozX, pozY, pozX - 1, pozY);
-//                }
-//                break;
-//            case KEY_RIGHT:
-//                if (swiat.czyPoleJestCzesiaMapy(pozX + 1, pozY)) {
-//                    swiat.przesun(pozX, pozY, pozX + 1, pozY);
-//                }
-//                break;
-//            default:
-//                break;
-//        }
-       // Umiejetnosc();
-
     }
 
     public void Umiejetnosc() {
+        System.out.println("HEJ");
         if (!czyUmiejetnoscAktywna && odlicznanieDoUmiejetnosci < 5) {
             odlicznanieDoUmiejetnosci++;
             stanPoczatkowy = sila;
@@ -105,12 +54,15 @@ public void setRuch(Ruch x){
     }
     public void magicznyEliksir() {
             if (odlicznanieDoUmiejetnosci == 5) {
+                System.out.println("aktywowana");
                 swiat.dodajPowiadomienie("Superumiejetnosc aktywowana! ");
                 czyUmiejetnoscAktywna = true;
                 sila = 11;
             } else if (czyUmiejetnoscAktywna == false) {
+                System.out.println("nie gotowa");
                 swiat.dodajPowiadomienie("Superumiejetnosc nie jest gotowa! ");
             } else if (czyUmiejetnoscAktywna) {
+                System.out.println("zosatlo do konca");
                 swiat.dodajPowiadomienie("Do konca super umiejetnosci pozostalo: " + odlicznanieDoUmiejetnosci + ".");
             }
 

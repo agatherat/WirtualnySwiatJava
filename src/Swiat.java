@@ -13,11 +13,6 @@ public class Swiat {
     private int tura = 1;
     private static final String SCIEZKA = "zapis.txt";
 
-    public static final int UPARROW = 30;
-    public static final int DOWNARROW = 31;
-    public static final int RIGHTARROW = 16;
-    public static final int LEFTARROW = 17;
-
     public Swiat(Wymiary m) {
         this.m = m;
         this.mapa = new Organizm[m.x][m.y];
@@ -28,7 +23,7 @@ public class Swiat {
         }
         organizmy = new ArrayList<Organizm>();
         powiadomienia= new ArrayList<String>();
-        //this.powiadomienia.add("TURA "+tura);
+
         if (m.x * m.y > 500) { //dla bardzo duzej mapy tworze wiecej organizmow
             for (int i = 0; i < 5; i++) {
                 organizmy.add(new Owca(0, 0, this, 0, true));
@@ -80,7 +75,6 @@ public class Swiat {
         this.organizmy = organizmy;
         this.tura = tura;
         this.mapa = new Organizm[m.x][m.y];
-        //organizmy = new ArrayList<Organizm>();
         powiadomienia= new ArrayList<String>();
         for (int i = 0; i < m.x; i++) {
             for (int j = 0; j < m.y; j++) {
@@ -94,11 +88,6 @@ public class Swiat {
         }
     }
 
-    //bool operator==(const Koordynaty& k1, const Koordynaty& k2)
-    //	{
-    //		if (k1.x == k2.x && k1.y == k2.y) return true;
-    //		return false;
-    //	} JAK TO??????????
     public static boolean isEqual(Koordynaty k1, Koordynaty k2) {
         return k1.x == k2.x && k1.y == k2.y;
     }
@@ -112,43 +101,14 @@ public class Swiat {
     public ArrayList<String> getPowiadomienia() {
         return powiadomienia;
     }
-//    public void wypiszPowiadomienia() {
-//        if (powiadomienia.size() < 6) {
-//            for (int i = 0; i < powiadomienia.size(); i++) {
-//                System.out.println(powiadomienia.get(i));
-//            }
-//        }
-//        else
-//            for (int i = 0; i < 6; i++) {
-//                System.out.println(powiadomienia.get(i));
-//            }
-//    }
-
-    public String pobierzPowiadomienia() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("<html>");
-        if (powiadomienia.size() < 6) {
-            for (int i = 0; i < powiadomienia.size(); i++) {
-                builder.append(powiadomienia.get(i)).append("<br>");
-            }
-        } else {
-            for (int i = 0; i < 6; i++) {
-                builder.append(powiadomienia.get(i)).append("<br>");
-            }
-        }
-        return builder.toString();
-    }
 
     public Organizm getOrganizm(int x, int y) {
-       // if (x >= 0 && x < this.m.x && y >= 0 && y < this.m.y) {
             return this.mapa[x][y];
-        //}
-        //return null;
     }
-    public Organizm getORganizmPoSymbolu(char symbol) {
+    public Czlowiek getCzlowiek() {
         for (Organizm organizm : organizmy) {
-            if (organizm.getSymbol() == symbol) {
-                return organizm;
+            if (organizm instanceof Czlowiek) {
+                return (Czlowiek) organizm;
             }
         }
         return null;
@@ -168,36 +128,7 @@ public class Swiat {
         }
 
         setTura(getTura() + 1);
-
-       // System.out.println("\033[H\033[2J");
-        //System.out.flush();
-        //rysujSwiat();
-
-        return;
     }
-
-//    public void rysujSwiat() {
-////        System.out.println("ABY PORUSZYC SIE UZYWAJ STRZALEK");
-////        System.out.println((char)UPARROW + " ruch w gore, " + (char)DOWNARROW + " ruch w dol, " + (char)RIGHTARROW + " ruch w prawo, " + (char)LEFTARROW + " ruch w lewo");
-////        System.out.println("* - Superumiejetnosc - MAGICZNY ELIKSIR - zwieksza sile czlowieka do 10 (mozesz uzyc po wykonaniu ruchu)");
-////        System.out.println("t - wykonaj ture");
-////        System.out.println("z - zapisz swiat\n");
-//
-//        for (int i = 0; i < m.y; i++) {
-//            for (int j = 0; j < m.x; j++) {
-//                if (mapa[j][i] == null) {
-//                    System.out.print(".");
-//                } else {
-//                    mapa[j][i].rysowanie();
-//                }
-//            }
-//            System.out.println();
-//        }
-//
-//        System.out.println("TURA " + getTura());
-//        //wypiszPowiadomienia();
-//
-//    }
 
     public int getTura() {
         return this.tura;

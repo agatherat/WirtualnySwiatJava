@@ -24,25 +24,18 @@ public class MainForm {
 
         Gra gra = new Gra(swiat);
         frame.setContentPane(gra.panel2);
-//        frame.addKeyListener(gra);
-//        gra.panel2.setFocusable(true);
+        frame.addKeyListener(new ArrowKeyListener(swiat));
         frame.pack();
-
     }
     private void wczytajNowySwiat() {
         Swiat wczytanySwiat = Swiat.wczytaj();
         Gra gra = new Gra(wczytanySwiat);
         frame.setContentPane(gra.panel2);
-//        frame.addKeyListener(gra);
-//        gra.panel2.setFocusable(true);
         frame.pack();
-        //MainForm.frame.requestFocusInWindow();
     }
-
     private MainForm() {
         nowySwiatButton.addActionListener(a -> stworzNowySwiat());
         wczytajSwiatButton.addActionListener(a-> wczytajNowySwiat());
-
     }
     public static void main(String[] args) {
         frame = new JFrame("Agnieszka Kulesz 193461");
@@ -50,11 +43,8 @@ public class MainForm {
         frame.setContentPane(new MainForm().panel1);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.addKeyListener(new ArrowKeyListener());
         frame.setFocusable(true);
         frame.requestFocusInWindow();
         frame.setVisible(true);
-
-
     }
 }

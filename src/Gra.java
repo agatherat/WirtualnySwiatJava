@@ -20,18 +20,15 @@ public class Gra {
         SUPERUMIEJETNOSCButton.addActionListener(a -> Superumiejetnosc());
 
         MAPApole.setLayout(new GridLayout());
-//        int multiplyer = 100;
-//        MAPApole.setSize(swiat.getM().x * multiplyer, swiat.getM().y * multiplyer);
         Mapa mapaPanel = new Mapa(swiat);
         MAPApole.add(mapaPanel);
 
     }
 
 public void NowaTura() {
-
     swiat.wykonajTure();
-
     MAPApole.removeAll();
+
     // Tworzenie nowego panelu mapaPanel na podstawie zaktualizowanego stanu świata
     Mapa mapaPanel = new Mapa(swiat);
     MAPApole.add(mapaPanel);
@@ -62,23 +59,9 @@ public void NowaTura() {
         swiat.zapisz();
     }
 
-//    public  void PokazDialogWyboruOrganizmu() {
-//        JDialog dialog = new JDialog();
-//
-//        Wybor w = new Wybor(dialog, swiat);
-//
-//        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//        dialog.setModal(true); // to block input to other windows
-//        dialog.getContentPane().add(w.mainPanel);
-//        dialog.pack();
-//        dialog.setLocationRelativeTo(null); // center on screen
-//        dialog.setVisible(true);
-//    }
-
     public void Superumiejetnosc() {
-        //PokazDialogWyboruOrganizmu();
-
-        //Czlowiek.Umiejetnosc();
+        Czlowiek czlowiek=swiat.getCzlowiek();
+        czlowiek.Umiejetnosc();
     }
 
 }
